@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+ blog:
+  image: blog:v1
+  restart: always
+  container_name: blog
+  ports:
+   - "8080:8080"
+  networks:
+   blog:
+  volumes:
+   - type: volume
+     source: project
+     target: /project
+
+volumes:
+ project:
+
+networks:
+ blog:
+  driver: bridge
+  name: blog

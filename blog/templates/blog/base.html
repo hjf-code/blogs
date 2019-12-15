@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://paulandcode.com/develop/ico/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/prism.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/front.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'ckeditor/ckeditor/contents.css' %}">
+    <script src="{% static 'blog/js/front.js' %}"></script>
+    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <title>黄建峰的个人博客</title>
+</head>
+
+<body style="background-color: rgb(47, 80, 85)">
+<div id="base_header">
+</div>
+<div id="base_body">
+    {% block body %}{% endblock %}
+    <div id="base_home">
+        <button class="blackButton" onclick="goHome()"><img src="https://paulandcode.com/develop/img/home.png"></button>
+    </div>
+</div>
+<div id="base_footer">
+    Powered by: <a target="_blank" href="https://www.djangoproject.com">Django</a>&nbsp;&nbsp;&nbsp;
+    GitHub: <a target="_blank" href="https://github.com/paulandcode">paulandcode</a><br>
+    ©2017-2018&nbsp;&nbsp;&nbsp;津ICP备18001706号
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+
+{% block body %}
+    <div id="detail_body">
+        <h1 id="detail_title">{{ blog.title }}</h1>
+        <div id="detail_label">
+            {% for label in blog.label.all %}
+                <label id="label{{ forloop.counter }}" onclick="location.href='{% url 'blog:index' label.id 'noKeyWords' 1%}'">
+                    {{ label.name }}
+                </label>&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+        </div>
+        <br/><br/>
+        <div class="cke_editable cke_editable_themed cke_contents_ltr cke_show_borders">
+            {{ blog.content|safe }}
+        </div>
+        <div id="detail_back">
+            <button class="blackButton" onclick="returnBack()"><img src="https://paulandcode.com/develop/img/back.png"></button>
+        </div>
+        <div id="detail_up">
+            <button class="blackButton" onclick="returnTop()"><img src="https://paulandcode.com/develop/img/up.png"></button>
+        </div>
+    </div>
+{% endblock %}

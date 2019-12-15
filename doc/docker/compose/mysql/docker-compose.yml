@@ -1,0 +1,39 @@
+version: "3.5"
+
+services:
+ mysql:
+  image: mysql:5.7
+  restart: always
+  container_name: mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: yourpassword
+   TZ: 'Asia/Shanghai'
+  command: [
+          '--character-set-server=utf8mb4',
+          '--collation-server=utf8mb4_unicode_ci',
+          '--default-time-zone=+8:00'
+          ]
+  ports:
+   - "3306:3306"
+  networks:
+   blog:
+  volumes:
+   - type: volume
+     source: data
+     target: /var/lib/mysql
+   - type: volume
+     source: config
+     target: /etc/mysql/mysql.conf.d
+   - type: volume
+     source: logs
+     target: /usr/local/mysql/logs
+
+volumes:
+ data:
+ config:
+ logs:
+
+networks:
+ blog:
+  driver: bridge
+  name: blog

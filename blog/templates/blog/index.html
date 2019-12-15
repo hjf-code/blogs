@@ -1,0 +1,63 @@
+{% extends "blog/base.html" %}
+
+{% block body %}
+    <div id="labels">
+        {% if label_list %}
+            {% for label in label_list %}
+                <label class="subLabel" onclick="location.href='{% url 'blog:index' label.id 'noKeyWords' 1%}'">
+                    {{ label.name }}
+                </label>&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div id="indexSearch">
+        <input id="searchText" type="text" title="" value="">&nbsp;&nbsp;&nbsp;
+        <button id="searchButton" onclick="
+                var finalUrl = '{% url 'blog:index' '0' 'value' 1 %}';
+                var value = document.getElementById('searchText').value;
+                if (value === '') {
+                value = 'noKeyWords';
+                }
+                finalUrl = finalUrl.replace('value',value);
+                location.href = finalUrl;">Search
+        </button>
+    </div>
+    <div class="page">
+        <div class="page_list">
+            {% if current_page %}
+                {% for blog in current_page %}
+                    <div class="blogTitle" onclick="location.href='{% url 'blog:detail' blog.id %}'">
+                        {{ blog.title }}
+                        <br>
+                        <span class="blogDate">{{ blog.modify_date }}</span>
+                    </div><br>
+                {% endfor %}
+            {% else %}
+                <p>No blogs are available.</p>
+            {% endif %}
+        </div>
+        <div class="page_num">
+            {# 判断'上一页'是否存在,如果存在则保留`上一页`标签 ,反之则不显示`上一页`标签 #}
+            {% if current_page.has_previous %}
+                <a href="{% url 'blog:index' label_id key_words current_page.previous_page_number %}"
+                   rel="external nofollow">上一页</a>
+            {% endif %}
+            {# 确定分页数量 #}
+            {% for index in paginator.page_range %}
+                {# 如果页码与当前页面相符,则添加红色背景 #}
+                {% if page_id == index %}
+                    <a href="{% url 'blog:index' label_id key_words index %}"
+                       style="background-color: rgb(0, 0, 0);">{{ index }}</a>
+                    {# 如果页面与当前页面不符,则正常显示 #}
+                {% else %}
+                    <a href="{% url 'blog:index' label_id key_words index %}" rel="external nofollow">{{ index }}</a>
+                {% endif %}
+            {% endfor %}
+            {# 判断'下一页'是否存在,如果存在则保留`下一页`标签 ,反之则不显示`下一页`标签 #}
+            {% if current_page.has_next %}
+                <a href="{% url 'blog:index' label_id key_words current_page.next_page_number %}"
+                   rel="external nofollow">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
