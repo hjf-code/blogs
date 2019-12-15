@@ -26,8 +26,8 @@ body {
     font-size: 14px;
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: #999;
-    background-size: 100% 100%;
     background: #000 url(https://paulandcode.com/develop/img/background2.jpg) no-repeat fixed;
+    background-size: 100% 100%;
 }
 
 /* LINKS */
