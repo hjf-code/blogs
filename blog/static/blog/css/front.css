@@ -69,6 +69,10 @@ label {
     color: #000;
 }
 
+#base_footer a {
+    color: #CCC;
+}
+
 #detail_up {
     height: 0;
     position: fixed;
